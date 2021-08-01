@@ -2,7 +2,6 @@
   "name": "kserial",
   "version": "1.0.3",
   "description": "Library for serializing to binary.",
-  "private": true,
   "main": "lib/kserial.js",
   "types": "lib/kserial.d.ts",
   "scripts": {
