@@ -108,3 +108,15 @@ export class TestMsgNoFlex {
 }
 register('tnof', TestMsgNoFlex.deserialize);
 
+export class TestEmptyTable {
+  static readonly id:string = 't_mt';
+  get serializeLength(): number { return 0; }
+  serialize(dest: Uint8Array): number {
+    return 0;
+  }
+  static deserialize(src: Uint8Array): TestEmptyTable {
+    return new TestEmptyTable();
+  }
+}
+register('t_mt', TestEmptyTable.deserialize);
+

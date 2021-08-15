@@ -27,3 +27,6 @@ table TestMsgNoFlex : tnof {
   uint16: uint16;
 }
 
+table TestEmptyTable : t_mt {
+}
+

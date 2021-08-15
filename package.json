@@ -1,6 +1,6 @@
 {
   "name": "kserial",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Library for serializing to binary.",
   "main": "lib/kserial.js",
   "types": "lib/kserial.d.ts",

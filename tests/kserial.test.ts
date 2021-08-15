@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import * as kserial from '../src/kserial';
 import {KSerializableAny} from '../src/kserial';
-import {TestMsg, TestMsgJustStr, TestMsgNoFlex, TestEnum} from './test_msg';
+import {TestMsg, TestMsgJustStr, TestMsgNoFlex, TestEnum, TestEmptyTable} from './test_msg';
 
 describe('kserial', function() {
   it('serializes and deserializes a TestMsgJustStr', function() {
@@ -76,5 +76,12 @@ describe('kserial', function() {
     expect(out.subs).is.empty;
     expect(out.any).equal(null);
     expect(binary.length).equal(30);
+  });
+
+  it('serializes and deserializes an empty table to zero bytes', function () {
+    const input = new TestEmptyTable();
+    const binary = kserial.serialize(input);
+    const out = TestEmptyTable.deserialize(binary);
+    expect(binary.length).equal(0);
   });
 });
