@@ -30,3 +30,28 @@ table TestMsgNoFlex : tnof {
 table TestEmptyTable : t_mt {
 }
 
+table TestNineBools : tb09 {
+  a: bool;
+  b: bool;
+  c: bool;
+  d: bool;
+  e: bool;
+  f: bool;
+  g: bool;
+  h: bool;
+  i: bool;
+}
+
+table TestTenBools : tb10 {
+  a: bool;
+  b: bool;
+  c: bool;
+  d: bool;
+  e: bool;
+  f: bool;
+  g: bool;
+  h: bool;
+  i: bool;
+  j: bool;
+}
+

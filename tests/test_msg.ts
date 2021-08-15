@@ -120,3 +120,76 @@ export class TestEmptyTable {
 }
 register('t_mt', TestEmptyTable.deserialize);
 
+export class TestNineBools {
+  static readonly id:string = 'tb09';
+  a: boolean;
+  b: boolean;
+  c: boolean;
+  d: boolean;
+  e: boolean;
+  f: boolean;
+  g: boolean;
+  h: boolean;
+  i: boolean;
+  constructor({a=false,b=false,c=false,d=false,e=false,f=false,g=false,h=false,i=false}:{a?:boolean,b?:boolean,c?:boolean,d?:boolean,e?:boolean,f?:boolean,g?:boolean,h?:boolean,i?:boolean}={}) {this.a=a; this.b=b; this.c=c; this.d=d; this.e=e; this.f=f; this.g=g; this.h=h; this.i=i;}
+  get serializeLength(): number { return 2; }
+  serialize(dest: Uint8Array): number {
+    serializeByte(dest, 1, ((this.a?1:0))+((this.b?1:0)<<1)+((this.c?1:0)<<2)+((this.d?1:0)<<3)+((this.e?1:0)<<4)+((this.f?1:0)<<5)+((this.g?1:0)<<6)+((this.h?1:0)<<7));
+    serializeByte(dest, 0, ((this.i?1:0)));
+    return 2;
+  }
+  static deserialize(src: Uint8Array): TestNineBools {
+    const bools0 = deserializeByte(src, 1);
+    return new TestNineBools({
+      a: !!((bools0>>0)&1),
+      b: !!((bools0>>1)&1),
+      c: !!((bools0>>2)&1),
+      d: !!((bools0>>3)&1),
+      e: !!((bools0>>4)&1),
+      f: !!((bools0>>5)&1),
+      g: !!((bools0>>6)&1),
+      h: !!((bools0>>7)&1),
+      i: !!deserializeByte(src, 0),
+    });
+  }
+}
+register('tb09', TestNineBools.deserialize);
+
+export class TestTenBools {
+  static readonly id:string = 'tb10';
+  a: boolean;
+  b: boolean;
+  c: boolean;
+  d: boolean;
+  e: boolean;
+  f: boolean;
+  g: boolean;
+  h: boolean;
+  i: boolean;
+  j: boolean;
+  constructor({a=false,b=false,c=false,d=false,e=false,f=false,g=false,h=false,i=false,j=false}:{a?:boolean,b?:boolean,c?:boolean,d?:boolean,e?:boolean,f?:boolean,g?:boolean,h?:boolean,i?:boolean,j?:boolean}={}) {this.a=a; this.b=b; this.c=c; this.d=d; this.e=e; this.f=f; this.g=g; this.h=h; this.i=i; this.j=j;}
+  get serializeLength(): number { return 2; }
+  serialize(dest: Uint8Array): number {
+    serializeByte(dest, 1, ((this.a?1:0))+((this.b?1:0)<<1)+((this.c?1:0)<<2)+((this.d?1:0)<<3)+((this.e?1:0)<<4)+((this.f?1:0)<<5)+((this.g?1:0)<<6)+((this.h?1:0)<<7));
+    serializeByte(dest, 0, ((this.i?1:0))+((this.j?1:0)<<1));
+    return 2;
+  }
+  static deserialize(src: Uint8Array): TestTenBools {
+    const bools0 = deserializeByte(src, 1);
+    const bools1 = deserializeByte(src, 0);
+    return new TestTenBools({
+      a: !!((bools0>>0)&1),
+      b: !!((bools0>>1)&1),
+      c: !!((bools0>>2)&1),
+      d: !!((bools0>>3)&1),
+      e: !!((bools0>>4)&1),
+      f: !!((bools0>>5)&1),
+      g: !!((bools0>>6)&1),
+      h: !!((bools0>>7)&1),
+      i: !!((bools1>>0)&1),
+      j: !!((bools1>>1)&1),
+    });
+  }
+}
+register('tb10', TestTenBools.deserialize);
+

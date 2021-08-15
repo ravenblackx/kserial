@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import * as kserial from '../src/kserial';
 import {KSerializableAny} from '../src/kserial';
-import {TestMsg, TestMsgJustStr, TestMsgNoFlex, TestEnum, TestEmptyTable} from './test_msg';
+import {TestMsg, TestMsgJustStr, TestMsgNoFlex, TestEnum, TestEmptyTable, TestTenBools, TestNineBools} from './test_msg';
 
 describe('kserial', function() {
   it('serializes and deserializes a TestMsgJustStr', function() {
@@ -83,5 +83,35 @@ describe('kserial', function() {
     const binary = kserial.serialize(input);
     const out = TestEmptyTable.deserialize(binary);
     expect(binary.length).equal(0);
+  });
+
+  it('serializes and deserializes bools correctly', function () {
+    const input = new TestTenBools({a:true, b:true, c:true, d:true, e:true,j:true});
+    const binary = kserial.serialize(input);
+    const out = TestTenBools.deserialize(binary);
+    expect(binary.length).equal(2);
+    expect(out.a).equal(true);
+    expect(out.b).equal(true);
+    expect(out.c).equal(true);
+    expect(out.d).equal(true);
+    expect(out.e).equal(true);
+    expect(out.f).equal(false);
+    expect(out.g).equal(false);
+    expect(out.h).equal(false);
+    expect(out.i).equal(false);
+    expect(out.j).equal(true);
+  });
+
+  it('serializes and deserializes single-byte bools correctly', function()  {
+    const input = new TestNineBools({i: true});
+    const binary = kserial.serialize(input);
+    const out = TestNineBools.deserialize(binary);
+    expect(binary.length).equal(2);
+    expect(out.i).equal(true);
+    expect(out.a).equal(false);
+    input.i = false;
+    const binary2 = kserial.serialize(input);
+    const out2 = TestNineBools.deserialize(binary2);
+    expect(out2.i).equal(false);
   });
 });
